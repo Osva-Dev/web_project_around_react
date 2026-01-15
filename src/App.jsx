@@ -1,14 +1,13 @@
 import "./App.css";
+import logo from "./assets/images/content/logo.svg";
+import editButton from "./assets/images/icons/edit.png";
+import editButton2 from "./assets/images/icons/edit-2.svg";
 
 function App() {
   return (
     <div className="page">
       <header className="header">
-        <img
-          className="header__logo"
-          src="./images/content/logo.svg"
-          alt="Around the U.S."
-        />
+        <img className="header__logo" src={logo} alt="Around the U.S." />
       </header>
       <main className="main">
         <section className="profile">
@@ -17,21 +16,21 @@ function App() {
               <img className="profile__picture" src="" alt="Profile Picture" />
               <img
                 className="profile__icon"
-                src="./images/icons/edit-2.svg"
+                src={editButton2}
                 alt="Button Edit"
               />
             </div>
             <div className="profile__information">
               <div className="profile__custumise">
-                <h1 className="profile__name"></h1>
+                <h1 className="profile__name">Osvaldo Ochoa</h1>
                 <button
                   type="button"
                   className="profile__button profile__button_edit"
                 >
-                  <img src="./images/icons/edit.png" alt="Edit Button" />
+                  <img src={editButton} alt="Edit Button" />
                 </button>
               </div>
-              <p className="profile__profession"></p>
+              <p className="profile__profession">Web Developer JR</p>
             </div>
           </div>
           <div className="profile__add">
