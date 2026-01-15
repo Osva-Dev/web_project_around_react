@@ -1,5 +1,3 @@
-import headerLogo from "./assets/images/logo/favicon.svg";
-
 import "./App.css";
 
 function App() {
