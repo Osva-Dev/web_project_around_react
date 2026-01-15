@@ -1,35 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import headerLogo from "./assets/images/logo/favicon.svg";
+
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="page">
+        <header className="header">
+          <img className="header__logo" src="" alt="Around the U.S. logo" />
+        </header>
+        <main className="main">
+          <section className="profile">
+            <div className="profile__user">
+              <div className="profile__picture-wrapper">
+                <img
+                  className="profile__picture"
+                  src=""
+                  alt="Profile Picture"
+                />
+              </div>
+              <div className="profile__information">
+                <div className="profile__custumise">
+                  <h1 className="profile__name">Osvaldo Ochoa</h1>
+                </div>
+                <p className="profile__profession">Web Developer JR</p>
+              </div>
+            </div>
+          </section>
+        </main>
+        <footer className="footer">
+          <p className="footer__copyright">&#169; 2024 Around The U.S.</p>
+        </footer>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
