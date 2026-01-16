@@ -1,14 +1,14 @@
-import "./App.css";
-import logo from "./assets/images/content/logo.svg";
-import editButton from "./assets/images/icons/edit.png";
-import editButton2 from "./assets/images/icons/edit-2.svg";
+import "../App.css";
+
+import editButton from "../assets/images/icons/edit.png";
+import editButton2 from "../assets/images/icons/edit-2.svg";
+
+import Header from "../components/Header/Header.jsx";
 
 function App() {
   return (
     <div className="page">
-      <header className="header">
-        <img className="header__logo" src={logo} alt="Around the U.S." />
-      </header>
+      <Header />
       <main className="main">
         <section className="profile">
           <div className="profile__user">
