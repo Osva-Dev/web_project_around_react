@@ -1,5 +1,5 @@
 .popup {
-  display: none;
+  position: fixed;
   width: 890px;
   height: 100%;
   top: 50%;
@@ -10,10 +10,6 @@
   z-index: 1;
   color: #000;
   background-color: rgba(0, 0, 0, 0.5);
-}
-
-.popup_opened {
-  display: block;
 }
 
 .popup__button {

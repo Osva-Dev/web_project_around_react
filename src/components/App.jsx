@@ -10,7 +10,6 @@ function App() {
     <div className="page">
       <Header />
       <Main />
-      <Popup />
       <Footer />
     </div>
   );
