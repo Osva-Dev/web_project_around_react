@@ -4,6 +4,7 @@ import buttonEditPhoto from "../../assets/images/icons/edit-2.svg";
 import photo from "../../assets/images/vegeta.jpg";
 import Popup from "./Popup";
 import NewCard from "../form/NewCard/NewCard";
+import EditProfile from "../form/EditProfile/EditProfile";
 
 function Main() {
   const [popup, setPopup] = useState(null);
@@ -11,7 +12,14 @@ function Main() {
 
   const newCardPopup = {
     title: "Nuevo Lugar",
-    children: <NewCard onAddCard={(card) => setCards([...cards, card])} />,
+    children: (
+      <NewCard onAddCard={(card) => setCards((prev) => [...prev, card])} />
+    ),
+  };
+
+  const editProfilePopup = {
+    title: "Editar Perfil",
+    children: <EditProfile />,
   };
 
   function handleOpenPopup(popupData) {
@@ -24,7 +32,7 @@ function Main() {
 
   return (
     <>
-      {/* Render del popup */}
+      {/* Popup */}
       {popup && (
         <Popup title={popup.title} onClose={handleClosePopup}>
           {popup.children}
@@ -32,7 +40,7 @@ function Main() {
       )}
 
       <main className="main">
-        {/* Sección Profile */}
+        {/* Profile */}
         <section className="profile">
           <div className="profile__user">
             <div className="profile__picture-wrapper">
@@ -41,27 +49,35 @@ function Main() {
                 src={photo}
                 alt="Profile Picture"
               />
+
+              {/* Editar foto */}
               <img
                 className="profile__icon"
                 src={buttonEditPhoto}
-                alt="Button Edit"
+                alt="Edit Photo"
+                onClick={() => handleOpenPopup(editProfilePopup)}
               />
             </div>
+
             <div className="profile__information">
               <div className="profile__custumise">
                 <h1 className="profile__name">Osvaldo Ochoa</h1>
+
+                {/* Editar info */}
                 <button
                   type="button"
                   className="profile__button profile__button_edit"
+                  onClick={() => handleOpenPopup(editProfilePopup)}
                 >
                   <img src={buttonEditInfo} alt="Edit Button" />
                 </button>
               </div>
+
               <p className="profile__profession">Web Developer</p>
             </div>
           </div>
 
-          {/* Botón + para agregar card */}
+          {/* Agregar card */}
           <button
             type="button"
             className="profile__button profile__button_add"
@@ -71,7 +87,7 @@ function Main() {
           </button>
         </section>
 
-        {/* Sección Place */}
+        {/* Cards */}
         <section className="place">
           {cards.map((card, index) => (
             <div className="place__card" key={index}>
@@ -79,19 +95,25 @@ function Main() {
                 className="place__delete"
                 src="./images/icons/trash.svg"
                 alt="Eliminar"
-                onClick={() => setCards(cards.filter((_, i) => i !== index))}
+                onClick={() =>
+                  setCards((prev) => prev.filter((_, i) => i !== index))
+                }
               />
               <img className="place__image" src={card.image} alt={card.name} />
               <div className="place__content">
                 <h2 className="place__title">{card.name}</h2>
                 <img
-                  className={`place__like ${card.liked ? "place__like_active" : ""}`}
+                  className={`place__like ${
+                    card.liked ? "place__like_active" : ""
+                  }`}
                   src="./images/icons/heart.svg"
                   alt="Like"
                   onClick={() => {
-                    const newCards = [...cards];
-                    newCards[index].liked = !newCards[index].liked;
-                    setCards(newCards);
+                    setCards((prev) =>
+                      prev.map((c, i) =>
+                        i === index ? { ...c, liked: !c.liked } : c,
+                      ),
+                    );
                   }}
                 />
               </div>
