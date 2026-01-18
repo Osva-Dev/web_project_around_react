@@ -1,10 +1,13 @@
 import { useState } from "react";
+
 import buttonEditInfo from "../../assets/images/icons/edit.png";
 import buttonEditPhoto from "../../assets/images/icons/edit-2.svg";
 import photo from "../../assets/images/vegeta.jpg";
+
 import Popup from "./Popup";
-import NewCard from "../form/NewCard/NewCard";
-import EditProfile from "../form/EditProfile/EditProfile";
+import NewCard from "../form/NewCard/NewCard.jsx";
+import EditProfile from "../form/EditProfile/EditProfile.jsx";
+import EditAvatar from "../form/EditAvatar/EditAvatar.jsx";
 
 function Main() {
   const [popup, setPopup] = useState(null);
@@ -20,6 +23,11 @@ function Main() {
   const editProfilePopup = {
     title: "Editar Perfil",
     children: <EditProfile />,
+  };
+
+  const editAvatarPopup = {
+    title: "Cambiar Foto de Perfil",
+    children: <EditAvatar />,
   };
 
   function handleOpenPopup(popupData) {
@@ -50,12 +58,12 @@ function Main() {
                 alt="Profile Picture"
               />
 
-              {/* Editar foto */}
+              {/* Editar avatar */}
               <img
                 className="profile__icon"
                 src={buttonEditPhoto}
                 alt="Edit Photo"
-                onClick={() => handleOpenPopup(editProfilePopup)}
+                onClick={() => handleOpenPopup(editAvatarPopup)}
               />
             </div>
 
@@ -63,7 +71,7 @@ function Main() {
               <div className="profile__custumise">
                 <h1 className="profile__name">Osvaldo Ochoa</h1>
 
-                {/* Editar info */}
+                {/* Editar perfil */}
                 <button
                   type="button"
                   className="profile__button profile__button_edit"
@@ -99,22 +107,25 @@ function Main() {
                   setCards((prev) => prev.filter((_, i) => i !== index))
                 }
               />
+
               <img className="place__image" src={card.image} alt={card.name} />
+
               <div className="place__content">
                 <h2 className="place__title">{card.name}</h2>
+
                 <img
                   className={`place__like ${
                     card.liked ? "place__like_active" : ""
                   }`}
                   src="./images/icons/heart.svg"
                   alt="Like"
-                  onClick={() => {
+                  onClick={() =>
                     setCards((prev) =>
                       prev.map((c, i) =>
                         i === index ? { ...c, liked: !c.liked } : c,
                       ),
-                    );
-                  }}
+                    )
+                  }
                 />
               </div>
             </div>
