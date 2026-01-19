@@ -1,16 +1,51 @@
-# React + Vite
+# Tripleten Around the U.S. React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Tripleten Around the U.S. es un proyecto desarrollado como parte del programa de Desarrollo Web de TripleTen.
+Este proyecto consiste en la migración tecnológica de una aplicación web originalmente construida con HTML, CSS y JavaScript, hacia una arquitectura moderna basada en React + Vite.
 
-Currently, two official plugins are available:
+El diseño visual se mantuvo fiel al brief original proporcionado en Figma, mientras que la lógica y estructura del proyecto fueron refactorizadas para adoptar un enfoque componente-basado.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Descripción del Proyecto
 
-## React Compiler
+La aplicación simula una red social visual donde los usuarios pueden interactuar con tarjetas de lugares, editar información de perfil y visualizar imágenes en ventanas emergentes (popups).
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+El objetivo principal del proyecto fue:
 
-## Expanding the ESLint configuration
+- Migrar un sitio web tradicional a React
+- Reutilizar estilos y estructura visual existentes
+- Implementar control de estado y renderizado dinámico
+- Mejorar la escalabilidad y mantenibilidad del código
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Migración de tecnologías
+
+Tecnologías originales:
+
+- HTML5
+- CSS3
+- JavaScript (Vanilla JS)
+- Manipulación directa del DOM
+
+Tecnologías actuales
+
+- React
+- Vite (como entorno de desarrollo)
+- JSX
+- Hooks (useState)
+- Arquitectura basada en componentes
+
+## Características del proyecto
+
+- Migración completa de HTML estático a componentes React
+- Popups reutilizables controlados por estado
+- Renderizado dinámico de cards
+- Componentes desacoplados y reutilizables
+- Conservación del diseño original sin romper estilos
+- Código limpio, organizado y escalable
+
+## Conclusión
+
+Este proyecto demuestra el proceso de migración de una aplicación web tradicional a una SPA moderna, aplicando buenas prácticas de desarrollo frontend, organización por componentes y manejo de estado con React.
+
+## Link de la Página Web
+
+[https//osva-dev.github.io/web_project_around/]()
