@@ -1,14 +1,20 @@
 import trash from "../../assets/images/icons/trash.svg";
 import heart from "../../assets/images/icons/heart.svg";
 
-export default function Card({ card }) {
+export default function Card({ card, onImageClick }) {
   const { name, link, isLiked } = card;
 
   return (
-    <li className="place__card">
-      <img className="place__delete" src={trash} alt="Eliminar" type="button" />
+    <div className="place__card">
+      <img className="place__delete" src={trash} alt="Eliminar" />
 
-      <img className="place__image" src={link} alt={name} />
+      {/* 👇 CLICK AQUÍ ABRE ImagePopup */}
+      <img
+        className="place__image"
+        src={link}
+        alt={name}
+        onClick={onImageClick}
+      />
 
       <div className="place__content">
         <h2 className="place__title">{name}</h2>
@@ -19,6 +25,6 @@ export default function Card({ card }) {
           alt="Like"
         />
       </div>
-    </li>
+    </div>
   );
 }

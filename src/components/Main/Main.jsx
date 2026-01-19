@@ -9,8 +9,8 @@ import NewCard from "../form/NewCard/NewCard.jsx";
 import EditProfile from "../form/EditProfile/EditProfile.jsx";
 import EditAvatar from "../form/EditAvatar/EditAvatar.jsx";
 import Card from "../Card/Card.jsx";
+import ImagePopup from "../ImagePopup/ImagePopup.jsx";
 
-/* ✅ DATOS FICTICIOS (SPRINT) */
 const initialCards = [
   {
     isLiked: false,
@@ -26,11 +26,10 @@ const initialCards = [
   },
 ];
 
-console.log(initialCards);
-
 function Main() {
   const [popup, setPopup] = useState(null);
   const [cards, setCards] = useState(initialCards);
+  const [selectedCard, setSelectedCard] = useState(null);
 
   const newCardPopup = {
     title: "Nuevo Lugar",
@@ -64,9 +63,8 @@ function Main() {
           {popup.children}
         </Popup>
       )}
-
+      <ImagePopup card={selectedCard} onClose={() => setSelectedCard(null)} />
       <main className="main">
-        {/* Profile */}
         <section className="profile">
           <div className="profile__user">
             <div className="profile__picture-wrapper">
@@ -75,8 +73,6 @@ function Main() {
                 src={photo}
                 alt="Profile Picture"
               />
-
-              {/* Editar avatar */}
               <img
                 className="profile__icon"
                 src={buttonEditPhoto}
@@ -84,12 +80,9 @@ function Main() {
                 onClick={() => handleOpenPopup(editAvatarPopup)}
               />
             </div>
-
             <div className="profile__information">
               <div className="profile__custumise">
                 <h1 className="profile__name">Osvaldo Ochoa</h1>
-
-                {/* Editar perfil */}
                 <button
                   type="button"
                   className="profile__button profile__button_edit"
@@ -98,12 +91,9 @@ function Main() {
                   <img src={buttonEditInfo} alt="Edit Profile" />
                 </button>
               </div>
-
               <p className="profile__profession">Web Developer</p>
             </div>
           </div>
-
-          {/* Agregar card */}
           <button
             type="button"
             className="profile__button profile__button_add"
@@ -112,11 +102,13 @@ function Main() {
             🞣
           </button>
         </section>
-
-        {/* Cards */}
         <section className="place">
           {cards.map((card) => (
-            <Card key={card._id} card={card} />
+            <Card
+              key={card._id}
+              card={card}
+              onImageClick={() => setSelectedCard(card)}
+            />
           ))}
         </section>
       </main>
