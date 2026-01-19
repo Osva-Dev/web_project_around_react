@@ -8,10 +8,29 @@ import Popup from "./Popup";
 import NewCard from "../form/NewCard/NewCard.jsx";
 import EditProfile from "../form/EditProfile/EditProfile.jsx";
 import EditAvatar from "../form/EditAvatar/EditAvatar.jsx";
+import Card from "../Card/Card.jsx";
+
+/* ✅ DATOS FICTICIOS (SPRINT) */
+const initialCards = [
+  {
+    isLiked: false,
+    _id: "1",
+    name: "Yosemite Valley",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg",
+  },
+  {
+    isLiked: false,
+    _id: "2",
+    name: "Lake Louise",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg",
+  },
+];
+
+console.log(initialCards);
 
 function Main() {
   const [popup, setPopup] = useState(null);
-  const [cards, setCards] = useState([]);
+  const [cards, setCards] = useState(initialCards);
 
   const newCardPopup = {
     title: "Nuevo Lugar",
@@ -40,7 +59,6 @@ function Main() {
 
   return (
     <>
-      {/* Popup */}
       {popup && (
         <Popup title={popup.title} onClose={handleClosePopup}>
           {popup.children}
@@ -62,7 +80,7 @@ function Main() {
               <img
                 className="profile__icon"
                 src={buttonEditPhoto}
-                alt="Edit Photo"
+                alt="Edit Avatar"
                 onClick={() => handleOpenPopup(editAvatarPopup)}
               />
             </div>
@@ -77,7 +95,7 @@ function Main() {
                   className="profile__button profile__button_edit"
                   onClick={() => handleOpenPopup(editProfilePopup)}
                 >
-                  <img src={buttonEditInfo} alt="Edit Button" />
+                  <img src={buttonEditInfo} alt="Edit Profile" />
                 </button>
               </div>
 
@@ -97,38 +115,8 @@ function Main() {
 
         {/* Cards */}
         <section className="place">
-          {cards.map((card, index) => (
-            <div className="place__card" key={index}>
-              <img
-                className="place__delete"
-                src="./images/icons/trash.svg"
-                alt="Eliminar"
-                onClick={() =>
-                  setCards((prev) => prev.filter((_, i) => i !== index))
-                }
-              />
-
-              <img className="place__image" src={card.image} alt={card.name} />
-
-              <div className="place__content">
-                <h2 className="place__title">{card.name}</h2>
-
-                <img
-                  className={`place__like ${
-                    card.liked ? "place__like_active" : ""
-                  }`}
-                  src="./images/icons/heart.svg"
-                  alt="Like"
-                  onClick={() =>
-                    setCards((prev) =>
-                      prev.map((c, i) =>
-                        i === index ? { ...c, liked: !c.liked } : c,
-                      ),
-                    )
-                  }
-                />
-              </div>
-            </div>
+          {cards.map((card) => (
+            <Card key={card._id} card={card} />
           ))}
         </section>
       </main>

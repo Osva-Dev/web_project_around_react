@@ -1,25 +1,24 @@
-export default function Card({ card, onDelete, onLike }) {
-  return (
-    <div className="place__card">
-      <img
-        className="place__delete"
-        src="./images/icons/trash.svg"
-        alt="Eliminar"
-        onClick={onDelete}
-      />
+import trash from "../../assets/images/icons/trash.svg";
+import heart from "../../assets/images/icons/heart.svg";
 
-      <img className="place__image" src={card.image} alt={card.name} />
+export default function Card({ card }) {
+  const { name, link, isLiked } = card;
+
+  return (
+    <li className="place__card">
+      <img className="place__delete" src={trash} alt="Eliminar" type="button" />
+
+      <img className="place__image" src={link} alt={name} />
 
       <div className="place__content">
-        <h2 className="place__title">{card.name}</h2>
+        <h2 className="place__title">{name}</h2>
 
         <img
-          className={`place__like ${card.liked ? "place__like_active" : ""}`}
-          src="./images/icons/heart.svg"
+          className={`place__like ${isLiked ? "place__like_active" : ""}`}
+          src={heart}
           alt="Like"
-          onClick={onLike}
         />
       </div>
-    </div>
+    </li>
   );
 }
