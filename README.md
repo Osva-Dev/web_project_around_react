@@ -48,4 +48,4 @@ Este proyecto demuestra el proceso de migración de una aplicación web tradicio
 
 ## Link de la Página Web
 
-[https//osva-dev.github.io/web_project_around/]()
+[https://osva-dev.github.io/web_project_around_react/](https://osva-dev.github.io/web_project_around_react/)
