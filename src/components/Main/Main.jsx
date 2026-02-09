@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+import api from "../../utils/Api.js";
 
 import buttonEditInfo from "../../assets/images/icons/edit.png";
 import buttonEditPhoto from "../../assets/images/icons/edit-2.svg";
@@ -11,24 +13,9 @@ import EditAvatar from "../form/EditAvatar/EditAvatar.jsx";
 import Card from "../Card/Card.jsx";
 import ImagePopup from "../ImagePopup/ImagePopup.jsx";
 
-const initialCards = [
-  {
-    isLiked: false,
-    _id: "1",
-    name: "Yosemite Valley",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg",
-  },
-  {
-    isLiked: false,
-    _id: "2",
-    name: "Lake Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg",
-  },
-];
-
 function Main() {
   const [popup, setPopup] = useState(null);
-  const [cards, setCards] = useState(initialCards);
+  const [cards, setCards] = useState([]);
   const [selectedCard, setSelectedCard] = useState(null);
 
   const newCardPopup = {
@@ -55,6 +42,17 @@ function Main() {
   function handleClosePopup() {
     setPopup(null);
   }
+
+  useEffect(() => {
+    api
+      .getCards()
+      .then((data) => {
+        setCards(data);
+      })
+      .catch((err) => {
+        console.error("Error al cargar tarjetas:", err);
+      });
+  }, []);
 
   return (
     <>

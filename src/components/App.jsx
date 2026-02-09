@@ -1,21 +1,20 @@
 import "../App.css";
 import { useEffect } from "react";
 
-import Header from "../components/Header/Header.jsx";
-import Main from "../components/Main/Main.jsx";
-import Footer from "../components/Footer/Footer.jsx";
+import Header from "./Header/Header.jsx";
+import Main from "./Main/Main.jsx";
+import Footer from "./Footer/Footer.jsx";
 
-import api from "../utils/api.js";
+import Api from "../utils/Api.js";
 
 function App() {
   useEffect(() => {
-    api
-      .getUserInfo()
+    Api.getUserInfo()
       .then((data) => {
         console.log("✅ Usuario:", data);
       })
       .catch((err) => {
-        console.error("❌ Error API:", err);
+        console.error("Error API:", err);
       });
   }, []);
 
