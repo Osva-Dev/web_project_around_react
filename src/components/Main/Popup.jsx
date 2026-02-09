@@ -14,7 +14,7 @@ export default function Popup({ title, children, onClose }) {
         >
           &#x1F7A9;
         </button>
-        {title && <h3 className="popup__subtitle">{title}</h3>}
+
         {children}
       </div>
     </div>
