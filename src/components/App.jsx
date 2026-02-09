@@ -1,17 +1,22 @@
 import "../App.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+
+import api from "../utils/Api.js";
 
 import Header from "./Header/Header.jsx";
 import Main from "./Main/Main.jsx";
 import Footer from "./Footer/Footer.jsx";
 
-import Api from "../utils/Api.js";
+import CurrentUserContext from "../contexts/CurrentUserContext.js";
 
 function App() {
+  const [currentUser, setCurrentUser] = useState(null);
+
   useEffect(() => {
-    Api.getUserInfo()
-      .then((data) => {
-        console.log("✅ Usuario:", data);
+    api
+      .getUserInfo()
+      .then((userData) => {
+        setCurrentUser(userData);
       })
       .catch((err) => {
         console.error("Error API:", err);
@@ -19,11 +24,13 @@ function App() {
   }, []);
 
   return (
-    <div className="page">
-      <Header />
-      <Main />
-      <Footer />
-    </div>
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="page">
+        <Header />
+        <Main />
+        <Footer />
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 

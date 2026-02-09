@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
 import api from "../../utils/Api.js";
 
 import buttonEditInfo from "../../assets/images/icons/edit.png";
 import buttonEditPhoto from "../../assets/images/icons/edit-2.svg";
-import photo from "../../assets/images/vegeta.jpg";
 
 import Popup from "./Popup";
 import NewCard from "../form/NewCard/NewCard.jsx";
@@ -12,6 +11,8 @@ import EditProfile from "../form/EditProfile/EditProfile.jsx";
 import EditAvatar from "../form/EditAvatar/EditAvatar.jsx";
 import Card from "../Card/Card.jsx";
 import ImagePopup from "../ImagePopup/ImagePopup.jsx";
+
+import CurrentUserContext from "../../contexts/CurrentUserContext.js";
 
 function Main() {
   const [popup, setPopup] = useState(null);
@@ -34,6 +35,8 @@ function Main() {
     title: "Cambiar Foto de Perfil",
     children: <EditAvatar />,
   };
+
+  const currentUser = useContext(CurrentUserContext);
 
   function handleOpenPopup(popupData) {
     setPopup(popupData);
@@ -68,7 +71,7 @@ function Main() {
             <div className="profile__picture-wrapper">
               <img
                 className="profile__picture"
-                src={photo}
+                src={currentUser?.avatar}
                 alt="Profile Picture"
               />
               <img
@@ -80,7 +83,7 @@ function Main() {
             </div>
             <div className="profile__information">
               <div className="profile__custumise">
-                <h1 className="profile__name">Osvaldo Ochoa</h1>
+                <h1 className="profile__name">{currentUser?.name}</h1>
                 <button
                   type="button"
                   className="profile__button profile__button_edit"
@@ -89,7 +92,7 @@ function Main() {
                   <img src={buttonEditInfo} alt="Edit Profile" />
                 </button>
               </div>
-              <p className="profile__profession">Web Developer</p>
+              <p className="profile__profession">{currentUser?.about}</p>
             </div>
           </div>
           <button

@@ -8,7 +8,6 @@ export default function Card({ card, onImageClick }) {
     <div className="place__card">
       <img className="place__delete" src={trash} alt="Eliminar" />
 
-      {/* 👇 CLICK AQUÍ ABRE ImagePopup */}
       <img
         className="place__image"
         src={link}
