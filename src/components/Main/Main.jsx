@@ -38,6 +38,17 @@ function Main() {
 
   const currentUser = useContext(CurrentUserContext);
 
+  const handleCardLike = (card) => {
+    api
+      .toggleLike(card._id, card.isLiked)
+      .then((updatedCard) => {
+        setCards((prevCards) =>
+          prevCards.map((c) => (c._id === card._id ? updatedCard : c)),
+        );
+      })
+      .catch((err) => console.error("Error al dar like:", err));
+  };
+
   function handleOpenPopup(popupData) {
     setPopup(popupData);
   }
@@ -109,6 +120,7 @@ function Main() {
               key={card._id}
               card={card}
               onImageClick={() => setSelectedCard(card)}
+              onCardLike={handleCardLike}
             />
           ))}
         </section>

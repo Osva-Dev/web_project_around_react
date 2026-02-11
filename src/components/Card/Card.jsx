@@ -1,8 +1,12 @@
 import trash from "../../assets/images/icons/trash.svg";
 import heart from "../../assets/images/icons/heart.svg";
+import heartComplete from "../../assets/images/icons/heart-complete.svg";
 
-export default function Card({ card, onImageClick }) {
-  const { name, link, isLiked } = card;
+export default function Card({ card, onImageClick, onCardLike }) {
+  const { name, link } = card;
+  const handleLikeClick = () => {
+    onCardLike(card);
+  };
 
   return (
     <div className="place__card">
@@ -17,11 +21,11 @@ export default function Card({ card, onImageClick }) {
 
       <div className="place__content">
         <h2 className="place__title">{name}</h2>
-
         <img
-          className={`place__like ${isLiked ? "place__like_active" : ""}`}
-          src={heart}
+          className={`place__like ${card.isLiked ? "place__like_active" : ""}`}
+          src={card.isLiked ? heartComplete : heart}
           alt="Like"
+          onClick={handleLikeClick}
         />
       </div>
     </div>
