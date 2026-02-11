@@ -38,16 +38,19 @@ function Main() {
 
   const currentUser = useContext(CurrentUserContext);
 
-  const handleCardLike = (card) => {
-    api
-      .toggleLike(card._id, card.isLiked)
-      .then((updatedCard) => {
-        setCards((prevCards) =>
-          prevCards.map((c) => (c._id === card._id ? updatedCard : c)),
-        );
-      })
-      .catch((err) => console.error("Error al dar like:", err));
-  };
+  async function handleCardLike(card) {
+    const isLiked = card.isLiked;
+
+    try {
+      const updatedCard = await api.toggleLike(card._id, isLiked);
+
+      setCards((prevCards) =>
+        prevCards.map((c) => (c._id === card._id ? updatedCard : c)),
+      );
+    } catch (error) {
+      console.error("Error al cambiar like:", error);
+    }
+  }
 
   function handleOpenPopup(popupData) {
     setPopup(popupData);

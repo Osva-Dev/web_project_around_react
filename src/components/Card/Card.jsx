@@ -4,9 +4,10 @@ import heartComplete from "../../assets/images/icons/heart-complete.svg";
 
 export default function Card({ card, onImageClick, onCardLike }) {
   const { name, link } = card;
-  const handleLikeClick = () => {
+
+  function handleLikeClick() {
     onCardLike(card);
-  };
+  }
 
   return (
     <div className="place__card">
@@ -22,7 +23,7 @@ export default function Card({ card, onImageClick, onCardLike }) {
       <div className="place__content">
         <h2 className="place__title">{name}</h2>
         <img
-          className={`place__like ${card.isLiked ? "place__like_active" : ""}`}
+          className="place__like"
           src={card.isLiked ? heartComplete : heart}
           alt="Like"
           onClick={handleLikeClick}
