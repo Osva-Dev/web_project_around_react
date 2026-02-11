@@ -2,16 +2,25 @@ import trash from "../../assets/images/icons/trash.svg";
 import heart from "../../assets/images/icons/heart.svg";
 import heartComplete from "../../assets/images/icons/heart-complete.svg";
 
-export default function Card({ card, onImageClick, onCardLike }) {
+export default function Card({ card, onImageClick, onCardLike, onCardDelete }) {
   const { name, link } = card;
 
   function handleLikeClick() {
     onCardLike(card);
   }
 
+  function handleDeleteClick() {
+    onCardDelete(card);
+  }
+
   return (
     <div className="place__card">
-      <img className="place__delete" src={trash} alt="Eliminar" />
+      <img
+        className="place__delete"
+        src={trash}
+        alt="Eliminar"
+        onClick={handleDeleteClick}
+      />
 
       <img
         className="place__image"

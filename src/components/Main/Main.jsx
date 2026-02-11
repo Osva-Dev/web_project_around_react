@@ -60,6 +60,16 @@ function Main() {
     setPopup(null);
   }
 
+  async function handleCardDelete(card) {
+    try {
+      await api.deleteCard(card._id);
+
+      setCards((prevCards) => prevCards.filter((c) => c._id !== card._id));
+    } catch (error) {
+      console.error("Error al eliminar tarjeta:", error);
+    }
+  }
+
   useEffect(() => {
     api
       .getCards()
@@ -124,6 +134,7 @@ function Main() {
               card={card}
               onImageClick={() => setSelectedCard(card)}
               onCardLike={handleCardLike}
+              onCardDelete={handleCardDelete}
             />
           ))}
         </section>
