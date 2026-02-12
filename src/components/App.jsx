@@ -10,6 +10,7 @@ import Footer from "./Footer/Footer.jsx";
 import CurrentUserContext from "../contexts/CurrentUserContext.js";
 
 function App() {
+  const [popup, setPopup] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
@@ -23,11 +24,34 @@ function App() {
       });
   }, []);
 
+  function handleOpenPopup(popupData) {
+    setPopup(popupData);
+  }
+
+  function handleClosePopup() {
+    setPopup(null);
+  }
+
+  async function handleUpdateUser(data) {
+    try {
+      const newUserData = await api.setUserInfo(data);
+      setCurrentUser(newUserData);
+      handleClosePopup(); // 🔥 cierra automáticamente
+    } catch (error) {
+      console.error("Error actualizando usuario:", error);
+    }
+  }
+
   return (
-    <CurrentUserContext.Provider value={currentUser}>
+    <CurrentUserContext.Provider value={{ currentUser, handleUpdateUser }}>
       <div className="page">
         <Header />
-        <Main />
+        <Main
+          popup={popup}
+          onOpenPopup={handleOpenPopup}
+          onClosePopup={handleClosePopup}
+        />
+
         <Footer />
       </div>
     </CurrentUserContext.Provider>

@@ -14,10 +14,11 @@ import ImagePopup from "../ImagePopup/ImagePopup.jsx";
 
 import CurrentUserContext from "../../contexts/CurrentUserContext.js";
 
-function Main() {
-  const [popup, setPopup] = useState(null);
+function Main({ popup, onOpenPopup, onClosePopup }) {
   const [cards, setCards] = useState([]);
   const [selectedCard, setSelectedCard] = useState(null);
+
+  const { currentUser } = useContext(CurrentUserContext);
 
   const newCardPopup = {
     title: "Nuevo Lugar",
@@ -36,8 +37,6 @@ function Main() {
     children: <EditAvatar />,
   };
 
-  const currentUser = useContext(CurrentUserContext);
-
   async function handleCardLike(card) {
     const isLiked = card.isLiked;
 
@@ -50,14 +49,6 @@ function Main() {
     } catch (error) {
       console.error("Error al cambiar like:", error);
     }
-  }
-
-  function handleOpenPopup(popupData) {
-    setPopup(popupData);
-  }
-
-  function handleClosePopup() {
-    setPopup(null);
   }
 
   async function handleCardDelete(card) {
@@ -84,11 +75,13 @@ function Main() {
   return (
     <>
       {popup && (
-        <Popup title={popup.title} onClose={handleClosePopup}>
+        <Popup title={popup.title} onClose={onClosePopup}>
           {popup.children}
         </Popup>
       )}
+
       <ImagePopup card={selectedCard} onClose={() => setSelectedCard(null)} />
+
       <main className="main">
         <section className="profile">
           <div className="profile__user">
@@ -102,16 +95,17 @@ function Main() {
                 className="profile__icon"
                 src={buttonEditPhoto}
                 alt="Edit Avatar"
-                onClick={() => handleOpenPopup(editAvatarPopup)}
+                onClick={() => onOpenPopup(editAvatarPopup)}
               />
             </div>
+
             <div className="profile__information">
               <div className="profile__custumise">
                 <h1 className="profile__name">{currentUser?.name}</h1>
                 <button
                   type="button"
                   className="profile__button profile__button_edit"
-                  onClick={() => handleOpenPopup(editProfilePopup)}
+                  onClick={() => onOpenPopup(editProfilePopup)}
                 >
                   <img src={buttonEditInfo} alt="Edit Profile" />
                 </button>
@@ -119,14 +113,16 @@ function Main() {
               <p className="profile__profession">{currentUser?.about}</p>
             </div>
           </div>
+
           <button
             type="button"
             className="profile__button profile__button_add"
-            onClick={() => handleOpenPopup(newCardPopup)}
+            onClick={() => onOpenPopup(newCardPopup)}
           >
             🞣
           </button>
         </section>
+
         <section className="place">
           {cards.map((card) => (
             <Card
