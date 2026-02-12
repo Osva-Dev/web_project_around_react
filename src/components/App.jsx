@@ -36,14 +36,27 @@ function App() {
     try {
       const newUserData = await api.setUserInfo(data);
       setCurrentUser(newUserData);
-      handleClosePopup(); // 🔥 cierra automáticamente
+      handleClosePopup();
     } catch (error) {
       console.error("Error actualizando usuario:", error);
     }
   }
 
+  async function handleUpdateAvatar(data) {
+    try {
+      const updatedUser = await api.updateAvatar(data.avatar);
+
+      setCurrentUser(updatedUser);
+      handleClosePopup();
+    } catch (error) {
+      console.error("Error actualizando avatar:", error);
+    }
+  }
+
   return (
-    <CurrentUserContext.Provider value={{ currentUser, handleUpdateUser }}>
+    <CurrentUserContext.Provider
+      value={{ currentUser, handleUpdateUser, handleUpdateAvatar }}
+    >
       <div className="page">
         <Header />
         <Main
