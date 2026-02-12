@@ -1,24 +1,16 @@
-import { useState, useContext, useEffect } from "react";
+import { useRef, useContext } from "react";
 import CurrentUserContext from "../../../contexts/CurrentUserContext";
 
 export default function EditAvatar() {
-  const { currentUser, handleUpdateAvatar } = useContext(CurrentUserContext);
-
-  const [avatar, setAvatar] = useState("");
-
-  // Cuando se abre el popup, limpia el input
-  useEffect(() => {
-    setAvatar("");
-  }, [currentUser]);
-
-  function handleChange(e) {
-    setAvatar(e.target.value);
-  }
+  const avatarRef = useRef();
+  const { handleUpdateAvatar } = useContext(CurrentUserContext);
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    handleUpdateAvatar({ avatar });
+    handleUpdateAvatar({
+      avatar: avatarRef.current.value,
+    });
   }
 
   return (
@@ -38,8 +30,7 @@ export default function EditAvatar() {
           className="popup__input popup__input--profile-picture"
           placeholder="URL de la Imagen"
           required
-          value={avatar}
-          onChange={handleChange}
+          ref={avatarRef}
         />
         <span className="popup__error popup__error--profile-picture"></span>
       </fieldset>
