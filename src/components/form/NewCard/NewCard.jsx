@@ -1,6 +1,22 @@
-export default function NewCard() {
+import { useState } from "react";
+
+export default function NewCard({ onAddPlaceSubmit }) {
+  const [name, setName] = useState("");
+  const [link, setLink] = useState("");
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    onAddPlaceSubmit({
+      name: name,
+      link: link,
+    });
+    setName("");
+    setLink("");
+  }
+
   return (
-    <form className="popup__container" noValidate>
+    <form className="popup__container" noValidate onSubmit={handleSubmit}>
       <h2 className="popup__subtitle">Nuevo Lugar</h2>
 
       <fieldset className="popup__content">
@@ -11,6 +27,8 @@ export default function NewCard() {
           required
           minLength="2"
           maxLength="40"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
         <span className="popup__error"></span>
 
@@ -19,6 +37,8 @@ export default function NewCard() {
           className="popup__input popup__input_about"
           placeholder="URL de la imagen"
           required
+          value={link}
+          onChange={(e) => setLink(e.target.value)}
         />
         <span className="popup__error"></span>
       </fieldset>

@@ -12,6 +12,7 @@ import CurrentUserContext from "../contexts/CurrentUserContext.js";
 function App() {
   const [popup, setPopup] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
+  const [cards, setCards] = useState([]);
 
   useEffect(() => {
     api
@@ -21,6 +22,17 @@ function App() {
       })
       .catch((err) => {
         console.error("Error API:", err);
+      });
+  }, []);
+
+  useEffect(() => {
+    api
+      .getCards()
+      .then((data) => {
+        setCards(data);
+      })
+      .catch((err) => {
+        console.error("Error al cargar tarjetas:", err);
       });
   }, []);
 
@@ -53,6 +65,36 @@ function App() {
     }
   }
 
+  function handleCardLike(card) {
+    api
+      .toggleLike(card._id, card.isLiked)
+      .then((updatedCard) => {
+        setCards((prevCards) =>
+          prevCards.map((c) => (c._id === card._id ? updatedCard : c)),
+        );
+      })
+      .catch(console.error);
+  }
+
+  async function handleCardDelete(card) {
+    try {
+      await api.deleteCard(card._id);
+
+      setCards((prevCards) => prevCards.filter((c) => c._id !== card._id));
+    } catch (error) {
+      console.error("Error al eliminar tarjeta:", error);
+    }
+  }
+  function handleAddPlaceSubmit(data) {
+    api
+      .createCard(data)
+      .then((newCard) => {
+        setCards((prevCards) => [newCard, ...prevCards]);
+        handleClosePopup();
+      })
+      .catch((err) => console.log(err));
+  }
+
   return (
     <CurrentUserContext.Provider
       value={{ currentUser, handleUpdateUser, handleUpdateAvatar }}
@@ -63,6 +105,10 @@ function App() {
           popup={popup}
           onOpenPopup={handleOpenPopup}
           onClosePopup={handleClosePopup}
+          cards={cards}
+          onCardLike={handleCardLike}
+          onCardDelete={handleCardDelete}
+          onAddPlaceSubmit={handleAddPlaceSubmit}
         />
 
         <Footer />

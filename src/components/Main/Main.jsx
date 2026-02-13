@@ -1,6 +1,4 @@
-import { useState, useEffect, useContext } from "react";
-
-import api from "../../utils/Api.js";
+import { useState, useContext } from "react";
 
 import buttonEditInfo from "../../assets/images/icons/edit.png";
 import buttonEditPhoto from "../../assets/images/icons/edit-2.svg";
@@ -14,17 +12,22 @@ import ImagePopup from "../ImagePopup/ImagePopup.jsx";
 
 import CurrentUserContext from "../../contexts/CurrentUserContext.js";
 
-function Main({ popup, onOpenPopup, onClosePopup }) {
-  const [cards, setCards] = useState([]);
+function Main({
+  popup,
+  onOpenPopup,
+  onClosePopup,
+  cards,
+  onCardLike,
+  onCardDelete,
+  onAddPlaceSubmit,
+}) {
   const [selectedCard, setSelectedCard] = useState(null);
 
   const { currentUser } = useContext(CurrentUserContext);
 
   const newCardPopup = {
     title: "Nuevo Lugar",
-    children: (
-      <NewCard onAddCard={(card) => setCards((prev) => [...prev, card])} />
-    ),
+    children: <NewCard onAddPlaceSubmit={onAddPlaceSubmit} />,
   };
 
   const editProfilePopup = {
@@ -36,41 +39,6 @@ function Main({ popup, onOpenPopup, onClosePopup }) {
     title: "Cambiar Foto de Perfil",
     children: <EditAvatar />,
   };
-
-  async function handleCardLike(card) {
-    const isLiked = card.isLiked;
-
-    try {
-      const updatedCard = await api.toggleLike(card._id, isLiked);
-
-      setCards((prevCards) =>
-        prevCards.map((c) => (c._id === card._id ? updatedCard : c)),
-      );
-    } catch (error) {
-      console.error("Error al cambiar like:", error);
-    }
-  }
-
-  async function handleCardDelete(card) {
-    try {
-      await api.deleteCard(card._id);
-
-      setCards((prevCards) => prevCards.filter((c) => c._id !== card._id));
-    } catch (error) {
-      console.error("Error al eliminar tarjeta:", error);
-    }
-  }
-
-  useEffect(() => {
-    api
-      .getCards()
-      .then((data) => {
-        setCards(data);
-      })
-      .catch((err) => {
-        console.error("Error al cargar tarjetas:", err);
-      });
-  }, []);
 
   return (
     <>
@@ -129,8 +97,8 @@ function Main({ popup, onOpenPopup, onClosePopup }) {
               key={card._id}
               card={card}
               onImageClick={() => setSelectedCard(card)}
-              onCardLike={handleCardLike}
-              onCardDelete={handleCardDelete}
+              onCardLike={onCardLike}
+              onCardDelete={onCardDelete}
             />
           ))}
         </section>
