@@ -1,4 +1,4 @@
-import "../App.css";
+import "../../src/blocks/page.css";
 import { useEffect, useState } from "react";
 
 import api from "../utils/Api.js";
