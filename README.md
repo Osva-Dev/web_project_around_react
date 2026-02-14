@@ -3,18 +3,26 @@
 Tripleten Around the U.S. es un proyecto desarrollado como parte del programa de Desarrollo Web de TripleTen.
 Este proyecto consiste en la migración tecnológica de una aplicación web originalmente construida con HTML, CSS y JavaScript, hacia una arquitectura moderna basada en React + Vite.
 
-El diseño visual se mantuvo fiel al brief original proporcionado en Figma, mientras que la lógica y estructura del proyecto fueron refactorizadas para adoptar un enfoque componente-basado.
+El diseño visual se mantuvo fiel al brief original proporcionado en Figma, mientras que la lógica y estructura del proyecto fueron refactorizadas para adoptar un enfoque completamente basado en componentes y manejo de estado declarativo.
 
 ## Descripción del Proyecto
 
-La aplicación simula una red social visual donde los usuarios pueden interactuar con tarjetas de lugares, editar información de perfil y visualizar imágenes en ventanas emergentes (popups).
+La aplicación simula una red social visual donde los usuarios pueden:
+
+- Visualizar tarjetas de lugares.
+- Dar y quitar likes.
+- Eliminar tarjetas.
+- Editar su perfil.
+- Agregar nuevos lugares.
+- Visualizar imágenes en ventanas emergentes (popups).
 
 El objetivo principal del proyecto fue:
 
-- Migrar un sitio web tradicional a React
-- Reutilizar estilos y estructura visual existentes
-- Implementar control de estado y renderizado dinámico
-- Mejorar la escalabilidad y mantenibilidad del código
+- Migrar un sitio web tradicional a React.
+- Reutilizar estilos y estructura visual existentes.
+- Implementar control de estado y renderizado dinámico.
+- Integrar comunicación con una API externa.
+- Mejorar la escalabilidad y mantenibilidad del código.
 
 ## Migración de tecnologías
 
@@ -27,24 +35,34 @@ Tecnologías originales:
 
 Tecnologías actuales
 
-- React
-- Vite (como entorno de desarrollo)
-- JSX
-- Hooks (useState)
-- Arquitectura basada en componentes
+- React.
+- Vite (entorno de desarrollo y build).
+- JSX.
+- Hooks (useState, useEffect).
+- Context API (useContext).
+- Arquitectura basada en componentes.
+- Integración con API REST.
 
 ## Características del proyecto
 
-- Migración completa de HTML estático a componentes React
-- Popups reutilizables controlados por estado
-- Renderizado dinámico de cards
-- Componentes desacoplados y reutilizables
-- Conservación del diseño original sin romper estilos
-- Código limpio, organizado y escalable
+- Migración completa de HTML estático a componentes React.
+- Renderizado dinámico de tarjetas desde datos obtenidos por API.
+- Sistema de likes con actualización de estado.
+- Eliminación dinámica de tarjetas.
+- Formularios controlados para edición de perfil.
+- Uso de Context para compartir datos globales del usuario.
+- Popups reutilizables controlados por estado.
+- Separación de lógica y presentación.
+- Despliegue en GitHub Pages
 
 ## Conclusión
 
-Este proyecto demuestra el proceso de migración de una aplicación web tradicional a una SPA moderna, aplicando buenas prácticas de desarrollo frontend, organización por componentes y manejo de estado con React.
+Este proyecto demuestra una evolución clara desde un enfoque tradicional basado en manipulación directa del DOM hacia una Single Page Application moderna, aplicando buenas prácticas de desarrollo frontend:
+
+- Separación de responsabilidades.
+- Manejo declarativo del estado.
+- Reutilización de componentes.
+- Integración con servicios externos.
 
 ## Link de la Página Web
 
